@@ -1,0 +1,21 @@
+name: Build DAUWOODS LIGHT APK
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Build with CMake
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+        
