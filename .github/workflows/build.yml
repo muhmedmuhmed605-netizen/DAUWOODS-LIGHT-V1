@@ -7,28 +7,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
-    - name: Compile C++ Source
+    - name: Build C++ Library
       run: |
-        echo "Building DAUWOODS LIGHT Core Library..."
+        echo "Starting DAUWOODS LIGHT compilation..."
         mkdir -p output
-        # محاكاة خطوة تجميع المكتبة البرمجية بأعلى كفاءة
-        g++ -shared -fPIC "DAUWOOD'S LIGHT.cxx" -o output/libdauwoodlight.so || true
-        echo "Build process completed successfully!"
+        g++ -shared -fPIC "DAUWOODS LIGHT.cxx" -o output/libdauwoodlight.so
+        echo "Build compiled successfully!"
 
-    - name: Upload Artifacts
+    - name: Save Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: DAUWOODS-LIGHT-APK
+        name: DAUWOODS-LIGHT-BUILD
         path: output/
         
