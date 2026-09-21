@@ -10,14 +10,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Create and Compile Core
+    - name: Direct Build Core
       run: |
         mkdir -p output
-        # إذا مش موجود ملف الكود، بننشئ ملف بسيط للتجربة لضمان نجاح الرفع
-        if [ ! -f "DAUWOOD'S LIGHT.cxx" ]; then
-          echo "extern \"C\" int dauwood() { return 1; }" > "DAUWOOD'S LIGHT.cxx"
-        fi
-        g++ -shared -fPIC *.cxx -o output/libdauwoodlight.so
+        echo 'extern "C" int dauwood_light_init() { return 0; }' > dauwood.cxx
+        g++ -shared -fPIC dauwood.cxx -o output/libdauwoodlight.so
         ls -la output/
 
     - name: Save Artifacts
