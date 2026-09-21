@@ -12,9 +12,11 @@ jobs:
 
     - name: Build C++ Library
       run: |
-        echo "Starting DAUWOODS LIGHT compilation..."
+        echo "Searching for C++ source file..."
+        ls -la
         mkdir -p output
-        g++ -shared -fPIC "DAUWOODS LIGHT.cxx" -o output/libdauwoodlight.so
+        # البحث التلقائي عن أي ملف cxx وبناؤه مباشرة بدون مشاكل مسافات
+        g++ -shared -fPIC *.cxx -o output/libdauwoodlight.so
         echo "Build compiled successfully!"
 
     - name: Save Artifacts
